@@ -9,13 +9,15 @@ public class DistanceUtils {
      * <p>
      * lat1, lon1 Start point lat2, lon2 End point el1 Start altitude in meters
      * el2 End altitude in meters
+     * <p>
      * source: https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude
+     * source: https://www.movable-type.co.uk/scripts/latlong.html
      *
      * @return Distance in Meters
      */
     public static double distance(double lat1, double lat2, double lon1, double lon2) {
 
-        final int R = 6371; // Radius of the earth
+        final int R = 6_371_000; // Radius of the earth in meters
 
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
@@ -24,7 +26,6 @@ public class DistanceUtils {
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        // convert to meters
-        return Math.sqrt(Math.pow(R * c * 1000, 2));
+        return R * c;
     }
 }
